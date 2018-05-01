@@ -39,26 +39,19 @@
 #' lowPassFIR <- lapply(cutoffFrequencies, function(x) signal::fir1(n = 10, w = x, type = "low"))
 #' names(lowPassFIR) <- paste0("Cutoff frequency=", cutoffFrequencies)
 #' plotFilterResponse(lowPassFIR)
-#' 
+#'
 #' ### plot filter repsonse of moving average with various window lengths
 #' windowLength <- seq(2, 5)
 #' movingAverage <- lapply(windowLength, function(x) {averageFilter <- rep(1/x, x); class(averageFilter) <- "Ma"; averageFilter})
 #' names(movingAverage) <- c(paste0("Moving Average n=", windowLength))
 #' plotFilterResponse(movingAverage)
-#' 
+#'
 #' ### comparing moving average with FIR filter
 #' movingAverage <- rep(1/10, 10)
 #' class(movingAverage) <- "Ma"
-#' filterList <- list(fir1(n = 15, w = 0.01, type = "low"), movingAverage)
+#' filterList <- list(signal::fir1(n = 15, w = 0.01, type = "low"), movingAverage)
 #' names(filterList) <- c("FIR_n=15_w=0.01", "MA_n=10")
 #' plotFilterResponse(filterList)
-#'
-#'
-#' timeVector <- seq(0, 200, 1)
-#' syntheticSignal <- 5*cos(2*pi/50*timeVector) + 3*cos(2*pi/4*timeVector) + 2*cos(2*pi/2.1*timeVector)
-#' plot(syntheticSignal, type = "l")
-#' lines(filter(syntheticSignal, filter = rep(1/4, 4)), col = "red")
-#' lines(filter(syntheticSignal, filter = rep(1/5, 5)), col = "blue")
 plotFilterResponse <- function(filterList, timeStep = 1, resolution = 512, xAxis = "period", xAxisLimits = c(0, 1), returnPlottingData = FALSE) {
 
   ### testing arguments before proceeding

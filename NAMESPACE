@@ -2,7 +2,6 @@
 
 export(calculateSpectrum)
 export(plotFilterResponse)
-export(reformatAirTemperatureDWD)
 import(dplyr)
 import(ggplot2)
 import(signal)

@@ -55,16 +55,9 @@ plotFilterResponse(movingAverage)
 ### comparing moving average with FIR filter
 movingAverage <- rep(1/10, 10)
 class(movingAverage) <- "Ma"
-filterList <- list(fir1(n = 15, w = 0.01, type = "low"), movingAverage)
+filterList <- list(signal::fir1(n = 15, w = 0.01, type = "low"), movingAverage)
 names(filterList) <- c("FIR_n=15_w=0.01", "MA_n=10")
 plotFilterResponse(filterList)
-
-
-timeVector <- seq(0, 200, 1)
-syntheticSignal <- 5*cos(2*pi/50*timeVector) + 3*cos(2*pi/4*timeVector) + 2*cos(2*pi/2.1*timeVector)
-plot(syntheticSignal, type = "l")
-lines(filter(syntheticSignal, filter = rep(1/4, 4)), col = "red")
-lines(filter(syntheticSignal, filter = rep(1/5, 5)), col = "blue")
 }
 \author{
 Daniel Beiter, \email{daniel.beiter@gfz-potsdam.de}
